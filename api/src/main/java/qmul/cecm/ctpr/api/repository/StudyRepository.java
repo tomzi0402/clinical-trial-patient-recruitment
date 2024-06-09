@@ -6,4 +6,5 @@ import qmul.cecm.ctpr.api.model.Study;
 
 @Repository
 public interface StudyRepository extends JpaRepository<Study, Long> {
+
 }

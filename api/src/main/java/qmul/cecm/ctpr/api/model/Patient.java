@@ -16,12 +16,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Integer age;
-    @ManyToOne
+    private LocalDate dob;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gender_id")
     private Gender gender;
-    @ManyToOne
-    @JoinColumn(name = "condition_id")
-    private Condition condition;
-    private LocalDate recruitmentDate;
+
 }

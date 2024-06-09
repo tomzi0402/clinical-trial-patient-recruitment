@@ -17,7 +17,7 @@ public class Study {
     private String title;
     private String therapeutics;
     private String description;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
 
