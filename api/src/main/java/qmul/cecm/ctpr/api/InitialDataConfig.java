@@ -52,8 +52,8 @@ public class InitialDataConfig {
                 studyRepo.save(new Study(4L, "Nutritional Impact on Adolescent Growth", "Nutrition", "Studies the effects of different diets on adolescent physical", statusRepo.findById(4L).get()));
                 studyRepo.save(new Study(5L, "Renewable Energy Adoption in Urban Areas", "Energy Studies", "Analyses factors influencing the adoption of renewable energy in cities", statusRepo.findById(5L).get()));
 
-                patientRepo.save(new Patient(1L, "John Smith", LocalDate.of(1990, 1, 31), genderRepo.findById(1L).get()));
-                patientRepo.save(new Patient(2L, "Mary Johnson", LocalDate.of(1994, 5, 24), genderRepo.findById(2L).get()));
+                patientRepo.save(new Patient(1L, "John", "Smith", LocalDate.of(1990, 1, 31), genderRepo.findById(1L).get(), false));
+                patientRepo.save(new Patient(2L, "Mary", "Johnson", LocalDate.of(1994, 5, 24), genderRepo.findById(2L).get(), false));
 
                 studyPatientRepo.save(new StudyPatient(1L, studyRepo.findById(1L).get(), patientRepo.findById(1L).get(), conditionRepo.findById(1L).get(), 45, LocalDate.of(2024, 05, 05)));
                 studyPatientRepo.save(new StudyPatient(2L, studyRepo.findById(4L).get(), patientRepo.findById(2L).get(), conditionRepo.findById(2L).get(), 32, LocalDate.of(2024, 05, 16)));

@@ -20,4 +20,28 @@ public class StudyControllerTest {
     public void testGetAllStudies() throws Exception {
         mockMvc.perform(get("/api/study")).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$[0].therapeutics").value("Computer Science"));
     }
+
+    @Test
+    public void testGetStudyById() throws Exception {
+        // TODO
+//        mockMvc.perform(get("/api/study")).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$[0].therapeutics").value("Computer Science"));
+    }
+
+    @Test
+    public void testCreateStudy() throws Exception {
+        // TODO
+//        mockMvc.perform(get("/api/study")).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$[0].therapeutics").value("Computer Science"));
+    }
+
+    @Test
+    public void testUpdateStudy() throws Exception {
+        // TODO
+//        mockMvc.perform(get("/api/study")).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$[0].therapeutics").value("Computer Science"));
+    }
+
+    @Test
+    public void testUpdateStatus() throws Exception {
+        // TODO
+//        mockMvc.perform(get("/api/study")).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$[0].therapeutics").value("Computer Science"));
+    }
 }

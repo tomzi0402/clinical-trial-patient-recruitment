@@ -49,8 +49,8 @@ public class StudyServiceTest {
 
     @Test
     public void testGetStudyById() {
-        given(studyRepo.findById(1L)).willReturn(Optional.of(mockStudies.getFirst()));
-        Study foundStudy = studyService.getStudyById(1L);
+        given(studyRepo.findById(mockStudies.getFirst().getId())).willReturn(Optional.of(mockStudies.getFirst()));
+        Study foundStudy = studyService.getStudyById(mockStudies.getFirst().getId());
         assertEquals(mockStudies.getFirst(), foundStudy);
     }
 
@@ -65,10 +65,10 @@ public class StudyServiceTest {
     public void testUpdateStudy() {
         Study firstStudy = mockStudies.getFirst();
         Study updatedStudy = new Study(firstStudy.getId(), firstStudy.getTitle(), "Environmental Science", firstStudy.getDescription(), firstStudy.getStatus());
-        given(studyRepo.findById(1L)).willReturn(Optional.of(firstStudy));
+        given(studyRepo.existsById(firstStudy.getId())).willReturn(true);
         given(studyRepo.save(any(Study.class))).willReturn(updatedStudy);
 
-        Study result = studyService.updateStudy(1L, updatedStudy);
+        Study result = studyService.updateStudy(updatedStudy);
         assertEquals(updatedStudy.getTherapeutics(), result.getTherapeutics());
     }
 
@@ -78,10 +78,10 @@ public class StudyServiceTest {
         Status newStatus = mockStudies.getLast().getStatus();
         Study updatedStudy = new Study(firstStudy.getId(), firstStudy.getTitle(), firstStudy.getTherapeutics(), firstStudy.getDescription(), newStatus);
 
-        given(studyRepo.findById(1L)).willReturn(Optional.of(firstStudy));
+        given(studyRepo.findById(firstStudy.getId())).willReturn(Optional.of(firstStudy));
         given(studyRepo.save(any(Study.class))).willReturn(updatedStudy);
 
-        Study result = studyService.updateStatus(1L, newStatus);
+        Study result = studyService.updateStatus(firstStudy.getId(), newStatus);
         assertEquals(updatedStudy.getStatus(), result.getStatus());
     }
 }

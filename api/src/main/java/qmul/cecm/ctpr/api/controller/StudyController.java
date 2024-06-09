@@ -14,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/study")
 public class StudyController {
@@ -33,6 +34,7 @@ public class StudyController {
         try {
             return ResponseEntity.ok(studyService.getStudyById(id));
         } catch (NoSuchElementException e) {
+            LOG.warn(e);
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
             LOG.error(e);
@@ -51,11 +53,12 @@ public class StudyController {
         }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Study> updateStudy(@PathVariable Long id, @RequestBody Study study) {
+    @PutMapping
+    public ResponseEntity<Study> updateStudy(@RequestBody Study study) {
         try {
-            return ResponseEntity.ok(studyService.updateStudy(id, study));
+            return ResponseEntity.ok(studyService.updateStudy(study));
         } catch (NoSuchElementException e) {
+            LOG.warn(e);
             return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             LOG.error(e);
@@ -68,6 +71,7 @@ public class StudyController {
         try {
             return ResponseEntity.ok(studyService.updateStatus(id, status));
         } catch (NoSuchElementException e) {
+            LOG.warn(e);
             return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             LOG.error(e);
