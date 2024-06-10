@@ -5,7 +5,7 @@ const Select = ({ id, list, onChangeHandler, selectedId }) => {
 	console.log('render Select');
 
 	return (
-		<select id={id} onChange={onChangeHandler} value={selectedId ? selectedId : null}>
+		<select id={id} onChange={onChangeHandler} value={selectedId ? selectedId : ''}>
 			{
 				list.data.map((item) => {
 					return (

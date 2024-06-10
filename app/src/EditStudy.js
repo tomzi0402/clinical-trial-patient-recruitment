@@ -13,6 +13,7 @@ const EditStudy = ({ apiEndPt }) => {
 
 	const [studyState, setStudyState] = React.useState({ id: "", title: "", therapeutics: "", description: "", status: { id : ""} });
     const [statusList, setStatusList] = React.useState({data: []});
+	const [isLoading, setIsLoading] = React.useState({loadingStudy: true, loadingStatus: true});
 
     const fetchStatusList = async() => {
 		try {
@@ -22,6 +23,9 @@ const EditStudy = ({ apiEndPt }) => {
 		}
 		catch (error) {
 			console.log(error);
+		}
+		finally {
+			setIsLoading((prevState) => ({...prevState, loadingStudy: false}));
 		}
     };
 
@@ -34,6 +38,9 @@ const EditStudy = ({ apiEndPt }) => {
 		catch (error) {
 			console.log(error);
 		}
+		finally {
+			setIsLoading((prevState) => ({...prevState, loadingStatus: false}));
+		}		
 	};	
 
 	const handleChangeValue = (event) => {
@@ -42,23 +49,24 @@ const EditStudy = ({ apiEndPt }) => {
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "title":
-				return setStudyState({ ...studyState, title: val });
+				return setStudyState((prevState) => ({...prevState, title: val}));
 			case "therapeutics":
-				return setStudyState({ ...studyState, therapeutics: val });
+				return setStudyState((prevState) => ({...prevState, therapeutics: val}));
 			case "description":
-				return setStudyState({ ...studyState, description: val });
+				return setStudyState((prevState) => ({...prevState, description: val}));
 			case "status":
-				return setStudyState({ ...studyState, status: { ...studyState.status, id: val}});
+				return setStudyState((prevState) => ({ ...prevState, status: { ...prevState.status, id: val}}));
 		}
 	}
 
-	React.useEffect(() => {
-        fetchStudy();
-    }, []);
-
     React.useEffect(() => {
         fetchStatusList();
+		fetchStudy();
     }, []);
+
+	if (isLoading.loadingStudy || isLoading.loadingStatus) {
+		return <div>Loading...</div>;
+	}			
 
 	return (
 		<div className='editForm'>

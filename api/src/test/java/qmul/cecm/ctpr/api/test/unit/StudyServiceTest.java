@@ -41,7 +41,7 @@ public class StudyServiceTest {
 
     @Test
     public void testGetAllStudies() {
-        given(studyRepo.findAll(Sort.by(Sort.Order.asc("therapeutics")))).willReturn(mockStudies);
+        given(studyRepo.findAll(Sort.by(Sort.Order.asc("id")))).willReturn(mockStudies);
         List<Study> foundStudies = studyService.getAllStudies();
         assertEquals(mockStudies.size(), foundStudies.size());
         assertEquals(mockStudies, foundStudies);

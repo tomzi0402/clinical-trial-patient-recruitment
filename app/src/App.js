@@ -5,6 +5,7 @@ import NewStudy from './NewStudy.js'
 import EditStudy from './EditStudy.js'
 import PatientList from './PatientList.js'
 import NewPatient from './NewPatient.js'
+import EditPatient from './EditPatient.js';
 import { BrowserRouter as Router, Link, Switch, Routes, Route, Redirect } from 'react-router-dom';
 
 const title = 'Clinical Trial Patient Recruitment System'
@@ -23,6 +24,7 @@ function App() {
           <Route path='/editStudy/:studyId' element={<EditStudy apiEndPt={API_ENDPOINT}/>}/>
           <Route path='/patient' element={<PatientList apiEndPt={API_ENDPOINT}/>}/>
           <Route path='/newPatient' element={<NewPatient apiEndPt={API_ENDPOINT}/>}/>
+          <Route path='/editPatient/:patientId' element={<EditPatient apiEndPt={API_ENDPOINT}/>}/>
           
         </Routes>
       </Router>

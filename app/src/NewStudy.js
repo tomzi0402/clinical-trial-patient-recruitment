@@ -11,16 +11,20 @@ const NewStudy = ({ apiEndPt }) => {
 
 	const [studyState, setStudyState] = React.useState({ title: "", therapeutics: "", description: "", status: {id : ""}});
     const [statusList, setStatusList] = React.useState({data: []});
+	const [isLoading, setIsLoading] = React.useState(true);
 
     const fetchStatusList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/status`);
 			console.log(result.data);
 			setStatusList({ data: result.data});
-			setStudyState({ ...studyState, status: { ...studyState.status, id: result.data[0].id}});
+			setStudyState((prevState) => ({ ...prevState, status: { ...prevState.status, id: result.data[0].id}}));
 		}
 		catch (error) {
 			console.log(error);
+		}
+		finally {
+			setIsLoading(false);
 		}
     };
 
@@ -30,19 +34,23 @@ const NewStudy = ({ apiEndPt }) => {
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "title":
-				return setStudyState({ ...studyState, title: val });
+				return setStudyState((prevState) => ({ ...prevState, title: val }));
 			case "therapeutics":
-				return setStudyState({ ...studyState, therapeutics: val });
+				return setStudyState((prevState) => ({ ...prevState, therapeutics: val }));
 			case "description":
-				return setStudyState({ ...studyState, description: val });
+				return setStudyState((prevState) => ({ ...prevState, description: val }));
 			case "status":
-				return setStudyState({ ...studyState, status: { ...studyState.status, id: val}});
+				return setStudyState((prevState) => ({ ...prevState, status: { ...prevState.status, id: val}}));
 		}
 	}
 
     React.useEffect(() => {
         fetchStatusList();
     }, []);
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}		
 
 	return (
 		<div className='editForm'>

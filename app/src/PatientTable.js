@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style/App.css';
 
 const PatientTable = ({ list, onDeletePatient }) => {
@@ -24,7 +25,6 @@ const PatientTable = ({ list, onDeletePatient }) => {
 				list.data.map((item) => {
 					return (
 						<li key={item.id}>
-							{/* <span style={{ width: '5%' }} ><Link to={`/editPatient/${item.id}`}>{item.id}</Link></span> */}
 							<span style={{ width: '5%' }} >{item.id}</span>
 							<span style={{ width: '10%' }} >{item.fullName}</span>
 							<span style={{ width: '5%' }} >{item.age}</span>
@@ -36,10 +36,8 @@ const PatientTable = ({ list, onDeletePatient }) => {
 							<span style={{ width: '15%' }} >{item.study.description}</span>
 							<span style={{ width: '5%' }} >{item.study.status.name}</span>
 							<span style={{ width: '10%' }} >
-								{/* <button type="button" onClick={() => { onEditPatient(item.id) }}>
-									Edit
-								</button>								 */}
-								&nbsp;&nbsp;
+								<EditPatientButton patientId={item.id}/>							
+								&nbsp;&nbsp;&nbsp;&nbsp;
 								<button className='button' type="button" onClick={() => { onDeletePatient(item.id, item.fullName) }}>
 									Delete
 								</button>
@@ -51,5 +49,18 @@ const PatientTable = ({ list, onDeletePatient }) => {
 		</ul >
 	)
 };
+
+const EditPatientButton = ({ patientId }) => {
+	let navigate = useNavigate();
+	const handleGoToEditPatient = () => {
+		navigate('/editPatient/' + patientId);
+	}
+
+	return (
+		<>
+			<button className='button' onClick={handleGoToEditPatient}>Edit</button>
+		</>
+	);	
+}
 
 export default React.memo(PatientTable);

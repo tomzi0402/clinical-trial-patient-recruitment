@@ -18,7 +18,7 @@ public class StudyService {
     StudyRepository studyRepo;
 
     public List<Study> getAllStudies() {
-        return studyRepo.findAll(Sort.by(Sort.Order.asc("therapeutics")));
+        return studyRepo.findAll(Sort.by(Sort.Order.asc("id")));
     }
 
     public Study getStudyById(Long id) {
