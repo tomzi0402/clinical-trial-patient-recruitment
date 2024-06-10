@@ -2,9 +2,9 @@ package qmul.cecm.ctpr.api.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @NoArgsConstructor
@@ -19,9 +19,22 @@ public class Patient {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    ;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "gender_id")
     private Gender gender;
-    private Boolean isDeleted;
+
+    @ManyToOne
+    @JoinColumn(name = "condition_id")
+    private Condition condition;
+
+    private LocalDate recruitmentDate;
+
+    @ManyToOne
+    @JoinColumn(name = "study_id")
+    private Study study;
+
+    public int getAge() {
+        return Period.between(dob, LocalDate.now()).getYears();
+    }
 }

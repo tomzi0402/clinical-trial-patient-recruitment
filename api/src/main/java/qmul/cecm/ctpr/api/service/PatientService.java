@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import qmul.cecm.ctpr.api.model.Patient;
 import qmul.cecm.ctpr.api.repository.PatientRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,7 +17,7 @@ public class PatientService {
     PatientRepository patientRepo;
 
     public List<Patient> getAllPatients() {
-        return patientRepo.findAll(Sort.by(Sort.Order.asc("firstName"), Sort.Order.asc("lastName")));
+        return patientRepo.findAll(Sort.by(Sort.Order.desc("recruitmentDate")));
     }
 
     public Patient getPatientById(Long id) {
@@ -38,9 +39,7 @@ public class PatientService {
         if (!patientRepo.existsById(id)) {
             throw new NoSuchElementException(id.toString());
         }
-        Patient oldPatient = patientRepo.findById(id).orElseThrow();
-        oldPatient.setIsDeleted(true);
-        patientRepo.save(oldPatient);
+        patientRepo.deleteById(id);
     }
 }
 

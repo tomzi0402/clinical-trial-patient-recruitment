@@ -1,0 +1,18 @@
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import './App.css';
+
+const BackToPreviousPage = () => {
+	let navigate = useNavigate();
+	const handleGoBack = () => {
+		navigate(-1)
+	}
+	return (
+		<>
+			<button className='button' type="button" onClick={handleGoBack}>Cancel</button>
+		</>
+	);
+}
+
+export default BackToPreviousPage;
