@@ -81,3 +81,7 @@ li:first-child {
   font-weight: bold;
   display: flex;
 }
+
+.error {
+  color: crimson;
+}

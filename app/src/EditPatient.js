@@ -17,6 +17,33 @@ const EditPatient = ({ apiEndPt }) => {
     const [conditionList, setConditionList] = React.useState({data: []});
     const [studyList, setStudyList] = React.useState({data: []});
 	const [isLoading, setIsLoading] = React.useState({loadingPatient: true, loadingGender: true, loadingCondition: true, loadingStudy: true});
+	const [errors, setErrors] = React.useState({firstName: "",	lastName: "", dob: "", gender: "", condition: "", study: "", recruitmentDate: ""});
+
+	const validate = () => {
+		const newErrors = {};
+		if (!patientState.firstName) {
+		  newErrors.firstName = 'First Name is required';
+		}
+		if (!patientState.lastName) {
+		  newErrors.lastName = 'Last Name is required';
+		}
+		if (!patientState.dob) {
+			newErrors.dob = 'Date of Birth is required';
+		 }		
+		if (!patientState.gender.id) {
+			newErrors.gender = 'Gender is required';
+		}	
+		if (!patientState.condition.id) {
+			newErrors.condition = 'Condition is required';
+		}	
+		if (!patientState.study.id) {
+			newErrors.study = 'Study is required';
+		}				
+		if (!patientState.recruitmentDate) {
+			newErrors.recruitmentDate = 'Recruitment Date is required';
+		}							  
+		return newErrors;
+	};	
 
     const fetchGenderList = async() => {
 		try {
@@ -96,6 +123,35 @@ const EditPatient = ({ apiEndPt }) => {
 		}
 	}
 
+	const SavePatientButton = ({ apiEndPt, patientState }) => {
+		let navigate = useNavigate();
+	
+		const handleSavePatient = async () => {
+			console.log('handleSavePatient');
+
+			const validationErrors = validate();
+			if (Object.keys(validationErrors).length > 0) {
+			  	setErrors(validationErrors);
+			} 
+			else {
+			  	setErrors({});
+				try {
+					const result = await axios.put(`${apiEndPt}/patient`, patientState);
+					navigate(-1)
+				}
+				catch (error) {
+					console.log(error);
+				}				
+			}			
+		};
+	
+		return (
+			<>
+				<button className='button' type="button" onClick={() => { handleSavePatient() }}>Save</button>
+			</>
+		);
+	};	
+
     React.useEffect(() => {
         fetchGenderList();
         fetchConditionList();
@@ -112,26 +168,33 @@ const EditPatient = ({ apiEndPt }) => {
 			<label htmlFor="patientId">Patient ID:</label>
 			<input id="patientId" type="text" value={patientState.id} readOnly></input>
 			<br />			
-			<label htmlFor="firstName">First Name:</label>
-			<input id="firstName" type="text" value={patientState.firstName} onChange={handleChangeValue}></input>
+			<label htmlFor="firstName">First Name:<span style={{ color: 'red' }}>*</span></label>
+			<input id="firstName" type="text" value={patientState.firstName} onChange={handleChangeValue} required></input>
+			{errors.firstName && <p className="error">{errors.firstName}</p>}
 			<br />
-			<label htmlFor="lastName">Last Name:</label>
-			<input id="lastName" type="text" value={patientState.lastName} onChange={handleChangeValue}></input>
+			<label htmlFor="lastName">Last Name:<span style={{ color: 'red' }}>*</span></label>
+			<input id="lastName" type="text" value={patientState.lastName} onChange={handleChangeValue} required></input>
+			{errors.lastName && <p className="error">{errors.lastName}</p>}
 			<br />   
-			<label htmlFor="dob">Date of Birth:</label>
-            <DatePicker id="dob" onChangedHandler={handleChangeValue} defaultDate={patientState.dob}/>
+			<label htmlFor="dob">Date of Birth:<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker id="dob" onChangedHandler={handleChangeValue} defaultDate={patientState.dob} required/>
+			{errors.dob && <p className="error">{errors.dob}</p>}
 			<br />                             
-			<label htmlFor="gender">Gender:</label>
-            <Select id="gender" list={genderList} onChangeHandler={handleChangeValue} selectedId={patientState.gender.id}/>
+			<label htmlFor="gender">Gender:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="gender" list={genderList} onChangeHandler={handleChangeValue} selectedId={patientState.gender.id} required/>
+			{errors.gender && <p className="error">{errors.gender}</p>}
 			<br />
-			<label htmlFor="condition">Condition:</label>
-            <Select id="condition" list={conditionList} onChangeHandler={handleChangeValue} selectedId={patientState.condition.id}/>
+			<label htmlFor="condition">Condition:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="condition" list={conditionList} onChangeHandler={handleChangeValue} selectedId={patientState.condition.id} required/>
+			{errors.condition && <p className="error">{errors.condition}</p>}
 			<br />
-			<label htmlFor="study">Study:</label>
-            <Select id="study" list={studyList} onChangeHandler={handleChangeValue} selectedId={patientState.study.id}/>
+			<label htmlFor="study">Study:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="study" list={studyList} onChangeHandler={handleChangeValue} selectedId={patientState.study.id} required/>
+			{errors.study && <p className="error">{errors.study}</p>}
 			<br />           
-			<label htmlFor="recruitmentDate">Recruitment Date:</label>
-            <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={patientState.recruitmentDate}/>
+			<label htmlFor="recruitmentDate">Recruitment Date:<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={patientState.recruitmentDate} required/>
+			{errors.recruitmentDate && <p className="error">{errors.recruitmentDate}</p>}
 			<br />                            
 			<SavePatientButton apiEndPt={apiEndPt} patientState={patientState} />
 			&nbsp;&nbsp;&nbsp;&nbsp;
@@ -140,25 +203,6 @@ const EditPatient = ({ apiEndPt }) => {
 	)
 };
 
-const SavePatientButton = ({ apiEndPt, patientState }) => {
-	let navigate = useNavigate();
 
-	const handleSavePatient = async () => {
-		console.log('handleSavePatient');
-		try {
-			const result = await axios.put(`${apiEndPt}/patient`, patientState);
-			navigate(-1)
-		}
-		catch (error) {
-			console.log(error);
-		}
-	};
-
-	return (
-		<>
-			<button className='button' type="button" onClick={() => { handleSavePatient() }}>Save</button>
-		</>
-	);
-};
 
 export default EditPatient;

@@ -15,6 +15,7 @@ const NewPatient = ({ apiEndPt }) => {
     const [conditionList, setConditionList] = React.useState({data: []});
     const [studyList, setStudyList] = React.useState({data: []});
 	const [isLoading, setIsLoading] = React.useState({loadingGender: true, loadingCondition: true, loadingStudy: true});
+	const [errors, setErrors] = React.useState({firstName: "",	lastName: "", dob: "", gender: "", condition: "", study: "", recruitmentDate: ""});
 
     const getToday = () => {
         const today = new Date();
@@ -23,6 +24,32 @@ const NewPatient = ({ apiEndPt }) => {
         const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };       
+
+	const validate = () => {
+		const newErrors = {};
+		if (!patientState.firstName) {
+		  newErrors.firstName = 'First Name is required';
+		}
+		if (!patientState.lastName) {
+		  newErrors.lastName = 'Last Name is required';
+		}
+		if (!patientState.dob) {
+			newErrors.dob = 'Date of Birth is required';
+		 }		
+		if (!patientState.gender.id) {
+			newErrors.gender = 'Gender is required';
+		}	
+		if (!patientState.condition.id) {
+			newErrors.condition = 'Condition is required';
+		}	
+		if (!patientState.study.id) {
+			newErrors.study = 'Study is required';
+		}				
+		if (!patientState.recruitmentDate) {
+			newErrors.recruitmentDate = 'Recruitment Date is required';
+		}							  
+		return newErrors;
+	};	
 
     const fetchGenderList = async() => {
 		try {
@@ -91,6 +118,35 @@ const NewPatient = ({ apiEndPt }) => {
 		}
 	}
 
+	const CreatePatientButton = ({ apiEndPt, patientState }) => {
+		let navigate = useNavigate();
+	
+		const handleCreatePatient = async () => {
+			console.log('handleCreatePatient');
+
+			const validationErrors = validate();
+			if (Object.keys(validationErrors).length > 0) {
+			  	setErrors(validationErrors);
+			} 
+			else {
+			  	setErrors({});
+				try {
+					const result = await axios.post(`${apiEndPt}/patient`, patientState);
+					navigate(-1)
+				}
+				catch (error) {
+					console.log(error);
+				}				
+			}
+		};
+	
+		return (
+			<>
+				<button className='button' type="button" onClick={() => { handleCreatePatient() }}>Create</button>
+			</>
+		);
+	};	
+
     React.useEffect(() => {
         fetchGenderList();
         fetchConditionList();
@@ -105,26 +161,33 @@ const NewPatient = ({ apiEndPt }) => {
 
 	return (
 		<div className='editForm'>
-			<label htmlFor="firstName">First Name:</label>
-			<input id="firstName" type="text" value={patientState.firstName} onChange={handleChangeValue}></input>
+			<label htmlFor="firstName">First Name:<span style={{ color: 'red' }}>*</span></label>
+			<input id="firstName" type="text" value={patientState.firstName} onChange={handleChangeValue} required></input>
+			{errors.firstName && <p className="error">{errors.firstName}</p>}
 			<br />
-			<label htmlFor="lastName">Last Name:</label>
-			<input id="lastName" type="text" value={patientState.lastName} onChange={handleChangeValue}></input>
+			<label htmlFor="lastName">Last Name:<span style={{ color: 'red' }}>*</span></label>
+			<input id="lastName" type="text" value={patientState.lastName} onChange={handleChangeValue} required></input>
+			{errors.lastName && <p className="error">{errors.lastName}</p>}
 			<br />   
-			<label htmlFor="dob">Date of Birth:</label>
-            <DatePicker id="dob" onChangedHandler={handleChangeValue}/>
+			<label htmlFor="dob">Date of Birth:<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker id="dob" onChangedHandler={handleChangeValue} required/>
+			{errors.dob && <p className="error">{errors.dob}</p>}
 			<br />                             
-			<label htmlFor="gender">Gender:</label>
-            <Select id="gender" list={genderList} onChangeHandler={handleChangeValue}/>
+			<label htmlFor="gender">Gender:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="gender" list={genderList} onChangeHandler={handleChangeValue} required/>
+			{errors.gender && <p className="error">{errors.gender}</p>}
 			<br />
-			<label htmlFor="condition">Condition:</label>
-            <Select id="condition" list={conditionList} onChangeHandler={handleChangeValue}/>
+			<label htmlFor="condition">Condition:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="condition" list={conditionList} onChangeHandler={handleChangeValue} required/>
+			{errors.condition && <p className="error">{errors.condition}</p>}
 			<br />
-			<label htmlFor="study">Study:</label>
-            <Select id="study" list={studyList} onChangeHandler={handleChangeValue}/>
+			<label htmlFor="study">Study:<span style={{ color: 'red' }}>*</span></label>
+            <Select id="study" list={studyList} onChangeHandler={handleChangeValue} required/>
+			{errors.study && <p className="error">{errors.study}</p>}
 			<br />           
-			<label htmlFor="recruitmentDate">Recruitment Date:</label>
-            <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={getToday()}/>
+			<label htmlFor="recruitmentDate">Recruitment Date:<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={getToday()} required/>
+			{errors.recruitmentDate && <p className="error">{errors.recruitmentDate}</p>}
 			<br />                            
 			<CreatePatientButton apiEndPt={apiEndPt} patientState={patientState} />
 			&nbsp;&nbsp;&nbsp;&nbsp;
@@ -133,25 +196,5 @@ const NewPatient = ({ apiEndPt }) => {
 	)
 };
 
-const CreatePatientButton = ({ apiEndPt, patientState }) => {
-	let navigate = useNavigate();
-
-	const handleCreatePatient = async () => {
-		console.log('handleCreatePatient');
-		try {
-			const result = await axios.post(`${apiEndPt}/patient`, patientState);
-			navigate(-1)
-		}
-		catch (error) {
-			console.log(error);
-		}
-	};
-
-	return (
-		<>
-			<button className='button' type="button" onClick={() => { handleCreatePatient() }}>Create</button>
-		</>
-	);
-};
 
 export default NewPatient;
