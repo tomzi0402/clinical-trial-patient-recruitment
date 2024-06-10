@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './App.css';
+import './style/App.css';
 
 import PatientTable from './PatientTable.js'
 
@@ -13,7 +13,7 @@ const PatientList = ({ apiEndPt }) => {
 	const fetchPatientList = async () => {
 		try {
 			const result = await axios.get(`${apiEndPt}/patient`);
-			// console.log(result.data);
+			console.log(result.data);
 			setPatientList({ data: result.data});
 		}
 		catch (error) {
@@ -21,14 +21,17 @@ const PatientList = ({ apiEndPt }) => {
 		}
 	};
 
-	const handleDeletePatient = async (id) => {
+	const handleDeletePatient = async (id, fullName) => {
 		console.log("handleDeletePatient=" + id);
-		try {
-			const result = await axios.delete(`${apiEndPt}/patient/${id}`);
-			fetchPatientList();
-		}
-		catch (error) {
-			console.log(error);
+		const userConfirmed = window.confirm(`Are you sure you want to delete the patient ${fullName}?`);
+		if (userConfirmed) {
+			try {
+				const result = await axios.delete(`${apiEndPt}/patient/${id}`);
+				fetchPatientList();
+			}
+			catch (error) {
+				console.log(error);
+			}
 		}
 	};	
 

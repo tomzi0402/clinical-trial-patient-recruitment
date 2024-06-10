@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from './Select';
-import BackToPreviousPage from './BackToPreviousPage';
+import Select from './component/Select.js';
+import BackToPreviousPage from './component/BackToPreviousPage.js';
 
-import './App.css';
+import './style/App.css';
 
 const NewStudy = ({ apiEndPt }) => {
 	console.log('render NewStudy()');
 
-	const [studyState, setStudyState] = React.useState({ title: "", therapeutics: "", description: "", status: { id : ""} });
+	const [studyState, setStudyState] = React.useState({ title: "", therapeutics: "", description: "", status: {id : ""}});
     const [statusList, setStatusList] = React.useState({data: []});
 
     const fetchStatusList = async() => {
@@ -17,7 +17,7 @@ const NewStudy = ({ apiEndPt }) => {
 			const result = await axios.get(`${apiEndPt}/status`);
 			console.log(result.data);
 			setStatusList({ data: result.data});
-            setStudyState({ ...studyState, status: { ...studyState.status, id: result.data[0].id}});
+			setStudyState({ ...studyState, status: { ...studyState.status, id: result.data[0].id}});
 		}
 		catch (error) {
 			console.log(error);
@@ -56,10 +56,10 @@ const NewStudy = ({ apiEndPt }) => {
 			<input id="description" type="text" value={studyState.description} onChange={handleChangeValue}></input>
 			<br />
 			<label htmlFor="status">Status:</label>
-            <Select list={statusList} onChangeHandler={handleChangeValue}/>
+            <Select id="status" list={statusList} onChangeHandler={handleChangeValue}/>
 			<br />
 			<CreateStudyButton apiEndPt={apiEndPt} studyState={studyState} />
-			&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<BackToPreviousPage />
 		</div>
 	)

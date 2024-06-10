@@ -37,4 +37,9 @@ public class Patient {
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
     }
+
+    public String getFullName() {
+        String fullName =  firstName.strip() + " " + lastName.strip();
+        return fullName.strip();
+    }
 }

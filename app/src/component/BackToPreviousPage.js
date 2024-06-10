@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import './App.css';
+import '../style/App.css';
 
 const BackToPreviousPage = () => {
 	let navigate = useNavigate();

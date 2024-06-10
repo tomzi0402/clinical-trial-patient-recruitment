@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './App.css';
+import './style/App.css';
 
 import StudyTable from './StudyTable.js'
 
@@ -9,7 +9,6 @@ const StudyList = ({ apiEndPt }) => {
 	console.log('render StudyList()');
 
 	const [studyList, setStudyList] = React.useState({ data: []});
-	const [study, setStudy] = React.useState({ data: []});
 
 	const fetchStudyList = async () => {
 		try {

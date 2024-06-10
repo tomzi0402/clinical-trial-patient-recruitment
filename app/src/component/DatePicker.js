@@ -1,0 +1,22 @@
+import React, { useState } from 'react';
+
+const DatePicker = ({id, onChangedHandler, defaultDate}) => {
+
+  const [selectedDate, setSelectedDate] = useState(defaultDate ? defaultDate : '');
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+    onChangedHandler(event);
+  };
+
+  return (    
+      <input
+        type="date"
+        id={id}
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
+  );
+};
+
+export default DatePicker;

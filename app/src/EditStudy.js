@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from './Select';
-import BackToPreviousPage from './BackToPreviousPage';
+import Select from './component/Select.js';
+import BackToPreviousPage from './component/BackToPreviousPage.js';
 
-import './App.css';
+import './style/App.css';
 
 const EditStudy = ({ apiEndPt }) => {
 	console.log('render EditStudy()');
@@ -75,10 +75,10 @@ const EditStudy = ({ apiEndPt }) => {
 			<input id="description" type="text" value={studyState.description} onChange={handleChangeValue}></input>
 			<br />
 			<label htmlFor="status">Status:</label>
-            <Select list={statusList} onChangeHandler={handleChangeValue} selectedStatus={studyState.status}/>
+            <Select id="status" list={statusList} onChangeHandler={handleChangeValue} selectedId={studyState.status.id}/>
 			<br />
 			<SaveStudyButton apiEndPt={apiEndPt} studyState={studyState}/>
-			&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<BackToPreviousPage />
 		</div>
 	)

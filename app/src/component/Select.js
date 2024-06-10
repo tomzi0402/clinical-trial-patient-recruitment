@@ -1,11 +1,11 @@
 import * as React from 'react';
-import './App.css';
+import '../style/App.css';
 
-const Select = ({ list, onChangeHandler, selectedStatus }) => {
+const Select = ({ id, list, onChangeHandler, selectedId }) => {
 	console.log('render Select');
 
 	return (
-		<select id='status' onChange={onChangeHandler} value={selectedStatus ? selectedStatus.id : null}>
+		<select id={id} onChange={onChangeHandler} value={selectedId ? selectedId : null}>
 			{
 				list.data.map((item) => {
 					return (
