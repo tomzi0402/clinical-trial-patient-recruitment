@@ -83,7 +83,7 @@ const NewPatient = ({ apiEndPt }) => {
 
     const fetchStudyList = async() => {
 		try {
-			const result = await axios.get(`${apiEndPt}/study`);
+			const result = await axios.get(`${apiEndPt}/study/allowRecruiting`);
 			console.log(result.data);
 			setStudyList({ data: result.data});
             setPatientState((prevState) => ({...prevState, study: {...prevState.study, id: result.data[0].id}}));

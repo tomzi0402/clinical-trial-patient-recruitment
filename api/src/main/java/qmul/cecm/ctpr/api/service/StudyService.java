@@ -42,4 +42,7 @@ public class StudyService {
         return studyRepo.save(oldStudy);
     }
 
+    public List<Study> getAllowRecruitingStudies() {
+        return studyRepo.findAllowRecruitingStudies();
+    }
 }

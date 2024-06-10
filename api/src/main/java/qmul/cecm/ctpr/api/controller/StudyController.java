@@ -1,5 +1,6 @@
 package qmul.cecm.ctpr.api.controller;
 
+import org.apache.coyote.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class StudyController {
             LOG.error(e);
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @GetMapping("/allowRecruiting")
+    public ResponseEntity<List<Study>> getAllowRecruitingStudies() {
+        return ResponseEntity.ok(studyService.getAllowRecruitingStudies());
     }
 
     @PostMapping

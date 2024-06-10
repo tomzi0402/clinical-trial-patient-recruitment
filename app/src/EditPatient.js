@@ -17,7 +17,7 @@ const EditPatient = ({ apiEndPt }) => {
     const [conditionList, setConditionList] = React.useState({data: []});
     const [studyList, setStudyList] = React.useState({data: []});
 	const [isLoading, setIsLoading] = React.useState({loadingPatient: true, loadingGender: true, loadingCondition: true, loadingStudy: true});
-	const [errors, setErrors] = React.useState({firstName: "",	lastName: "", dob: "", gender: "", condition: "", study: "", recruitmentDate: ""});
+	const [errors, setErrors] = React.useState({firstName: "",	lastName: "", dob: "", gender: "", condition: "", recruitmentDate: ""});
 
 	const validate = () => {
 		const newErrors = {};
@@ -35,9 +35,6 @@ const EditPatient = ({ apiEndPt }) => {
 		}	
 		if (!patientState.condition.id) {
 			newErrors.condition = 'Condition is required';
-		}	
-		if (!patientState.study.id) {
-			newErrors.study = 'Study is required';
 		}				
 		if (!patientState.recruitmentDate) {
 			newErrors.recruitmentDate = 'Recruitment Date is required';
@@ -75,7 +72,7 @@ const EditPatient = ({ apiEndPt }) => {
 
     const fetchStudyList = async() => {
 		try {
-			const result = await axios.get(`${apiEndPt}/study`);
+			const result = await axios.get(`${apiEndPt}/study/allowRecruiting`);
 			console.log(result.data);
 			setStudyList({ data: result.data});
 		}
@@ -188,9 +185,9 @@ const EditPatient = ({ apiEndPt }) => {
             <Select id="condition" list={conditionList} onChangeHandler={handleChangeValue} selectedId={patientState.condition.id} required/>
 			{errors.condition && <p className="error">{errors.condition}</p>}
 			<br />
-			<label htmlFor="study">Study:<span style={{ color: 'red' }}>*</span></label>
-            <Select id="study" list={studyList} onChangeHandler={handleChangeValue} selectedId={patientState.study.id} required/>
-			{errors.study && <p className="error">{errors.study}</p>}
+			<label htmlFor="study">Study:</label>
+			<input id="study" type="text" value={patientState.study.therapeutics} readOnly></input>
+            {/* <Select id="study" list={studyList} onChangeHandler={handleChangeValue} selectedId={patientState.study.id} required/> */}
 			<br />           
 			<label htmlFor="recruitmentDate">Recruitment Date:<span style={{ color: 'red' }}>*</span></label>
             <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={patientState.recruitmentDate} required/>
