@@ -16,15 +16,6 @@ public class InitialDataConfig {
     @Autowired
     Environment environment;
 
-    /**
-     * @param statusRepo
-     * @param genderRepo
-     * @param conditionRepo
-     * @param studyRepo
-     * @param patientRepo
-     * @param studyPatientRepo
-     * @return
-     */
     @Bean
     public ApplicationRunner loadData(StatusRepository statusRepo, GenderRepository genderRepo, ConditionRepository conditionRepo, StudyRepository studyRepo, PatientRepository patientRepo) {
         return args -> {
