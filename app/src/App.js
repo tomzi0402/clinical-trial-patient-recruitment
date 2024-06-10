@@ -12,8 +12,8 @@ const title = 'Clinical Trial Patient Recruitment System'
 const API_ENDPOINT = 'http://localhost:8080/api'
 
 function App() {
-  console.log('render App()')
-
+  // console.log('render App()')
+  
   return (
     <div className='App'>
       <h1>{title}</h1>

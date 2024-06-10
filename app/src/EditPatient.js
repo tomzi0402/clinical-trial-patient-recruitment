@@ -8,7 +8,7 @@ import DatePicker from './component/DatePicker.js';
 import './style/App.css';
 
 const EditPatient = ({ apiEndPt }) => {
-	console.log('render EditPatient()');
+	// console.log('render EditPatient()');
 
 	const { patientId } = useParams();
 
@@ -45,7 +45,7 @@ const EditPatient = ({ apiEndPt }) => {
     const fetchGenderList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/gender`);
-			console.log(result.data);
+			// console.log(result.data);
 			setGenderList({ data: result.data});
 		}
 		catch (error) {
@@ -59,7 +59,7 @@ const EditPatient = ({ apiEndPt }) => {
     const fetchConditionList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/condition`);
-			console.log(result.data);
+			// console.log(result.data);
 			setConditionList({ data: result.data});
 		}
 		catch (error) {
@@ -73,7 +73,7 @@ const EditPatient = ({ apiEndPt }) => {
     const fetchStudyList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/study/allowRecruiting`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStudyList({ data: result.data});
 		}
 		catch (error) {
@@ -87,7 +87,7 @@ const EditPatient = ({ apiEndPt }) => {
 	const fetchPatient = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/patient/${patientId}`);
-			console.log(result.data);
+			// console.log(result.data);
 			setPatientState(result.data);
 		}
 		catch (error) {
@@ -99,8 +99,8 @@ const EditPatient = ({ apiEndPt }) => {
 	};
 
 	const handleChangeValue = (event) => {
-		console.log(event.target.id);
-        console.log(patientState);
+		// console.log(event.target.id);
+        // console.log(patientState);
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "firstName":
@@ -124,7 +124,7 @@ const EditPatient = ({ apiEndPt }) => {
 		let navigate = useNavigate();
 	
 		const handleSavePatient = async () => {
-			console.log('handleSavePatient');
+			// console.log('handleSavePatient');
 
 			const validationErrors = validate();
 			if (Object.keys(validationErrors).length > 0) {
@@ -187,7 +187,6 @@ const EditPatient = ({ apiEndPt }) => {
 			<br />
 			<label htmlFor="study">Study:</label>
 			<input id="study" type="text" value={patientState.study.therapeutics} readOnly></input>
-            {/* <Select id="study" list={studyList} onChangeHandler={handleChangeValue} selectedId={patientState.study.id} required/> */}
 			<br />           
 			<label htmlFor="recruitmentDate">Recruitment Date:<span style={{ color: 'red' }}>*</span></label>
             <DatePicker id="recruitmentDate" onChangedHandler={handleChangeValue} defaultDate={patientState.recruitmentDate} required/>

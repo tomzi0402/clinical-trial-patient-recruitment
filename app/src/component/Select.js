@@ -2,8 +2,8 @@ import * as React from 'react';
 import '../style/App.css';
 
 const Select = ({ id, list, onChangeHandler, selectedId }) => {
-	console.log('render Select');
-
+	// console.log('render Select');
+	
 	return (
 		<select id={id} onChange={onChangeHandler} value={selectedId ? selectedId : ''}>
 			{

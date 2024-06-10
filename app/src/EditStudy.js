@@ -7,7 +7,7 @@ import BackToPreviousPage from './component/BackToPreviousPage.js';
 import './style/App.css';
 
 const EditStudy = ({ apiEndPt }) => {
-	console.log('render EditStudy()');
+	// console.log('render EditStudy()');
 
 	const { studyId } = useParams();
 
@@ -33,7 +33,7 @@ const EditStudy = ({ apiEndPt }) => {
     const fetchStatusList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/status`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStatusList({ data: result.data});
 		}
 		catch (error) {
@@ -47,7 +47,7 @@ const EditStudy = ({ apiEndPt }) => {
 	const fetchStudy = async () => {
 		try {
 			const result = await axios.get(`${apiEndPt}/study/${studyId}`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStudyState(result.data);
 		}
 		catch (error) {
@@ -59,8 +59,8 @@ const EditStudy = ({ apiEndPt }) => {
 	};	
 
 	const handleChangeValue = (event) => {
-		console.log(event.target.id);
-        console.log(studyState);
+		// console.log(event.target.id);
+        // console.log(studyState);
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "title":
@@ -78,7 +78,7 @@ const EditStudy = ({ apiEndPt }) => {
 		let navigate = useNavigate();
 	
 		const handleSaveStudy = async () => {
-			console.log('handleSaveStudy');
+			// console.log('handleSaveStudy');
 
 			const validationErrors = validate();
 			if (Object.keys(validationErrors).length > 0) {

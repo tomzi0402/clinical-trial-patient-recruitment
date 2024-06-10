@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const DatePicker = ({id, onChangedHandler, defaultDate}) => {
-  console.log("defaultDate=" + defaultDate);
+  // console.log("defaultDate=" + defaultDate);
+  
   const [selectedDate, setSelectedDate] = useState(defaultDate ? defaultDate : '');
 
   const handleDateChange = (event) => {

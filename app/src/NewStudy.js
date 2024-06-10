@@ -7,7 +7,7 @@ import BackToPreviousPage from './component/BackToPreviousPage.js';
 import './style/App.css';
 
 const NewStudy = ({ apiEndPt }) => {
-	console.log('render NewStudy()');
+	// console.log('render NewStudy()');
 
 	const [studyState, setStudyState] = React.useState({ title: "", therapeutics: "", description: "", status: {id : ""}});
     const [statusList, setStatusList] = React.useState({data: []});
@@ -31,7 +31,7 @@ const NewStudy = ({ apiEndPt }) => {
     const fetchStatusList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/status`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStatusList({ data: result.data});
 			setStudyState((prevState) => ({ ...prevState, status: { ...prevState.status, id: result.data[0].id}}));
 		}
@@ -44,8 +44,8 @@ const NewStudy = ({ apiEndPt }) => {
     };
 
 	const handleChangeValue = (event) => {
-		console.log(event.target.id);
-        console.log(studyState);
+		// console.log(event.target.id);
+        // console.log(studyState);
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "title":
@@ -62,7 +62,7 @@ const NewStudy = ({ apiEndPt }) => {
 	const CreateStudyButton = ({ apiEndPt, studyState }) => {
 		let navigate = useNavigate();
 		const handleCreateStudy = async () => {
-			console.log('handleCreateStudy');
+			// console.log('handleCreateStudy');
 
 			const validationErrors = validate();
 			if (Object.keys(validationErrors).length > 0) {

@@ -6,14 +6,14 @@ import './style/App.css';
 import PatientTable from './PatientTable.js'
 
 const PatientList = ({ apiEndPt }) => {
-	console.log('render PatientList()');
+	// console.log('render PatientList()');
 
 	const [patientList, setPatientList] = React.useState({ data: []});
 
 	const fetchPatientList = async () => {
 		try {
 			const result = await axios.get(`${apiEndPt}/patient`);
-			console.log(result.data);
+			// console.log(result.data);
 			setPatientList({ data: result.data});
 		}
 		catch (error) {
@@ -22,7 +22,7 @@ const PatientList = ({ apiEndPt }) => {
 	};
 
 	const handleDeletePatient = async (id, fullName) => {
-		console.log("handleDeletePatient=" + id);
+		// console.log("handleDeletePatient=" + id);
 		const userConfirmed = window.confirm(`Are you sure you want to delete the patient ${fullName}?`);
 		if (userConfirmed) {
 			try {

@@ -6,14 +6,14 @@ import './style/App.css';
 import StudyTable from './StudyTable.js'
 
 const StudyList = ({ apiEndPt }) => {
-	console.log('render StudyList()');
+	// console.log('render StudyList()');
 
 	const [studyList, setStudyList] = React.useState({ data: []});
 
 	const fetchStudyList = async () => {
 		try {
 			const result = await axios.get(`${apiEndPt}/study`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStudyList({ data: result.data});
 		}
 		catch (error) {

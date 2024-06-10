@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './style/App.css';
 
 const PatientTable = ({ list, onDeletePatient }) => {
-	console.log('render PatientTable');
+	// console.log('render PatientTable');
 
 	return (
 		<ul>

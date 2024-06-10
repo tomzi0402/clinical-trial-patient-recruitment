@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './style/App.css';
 
 const StudyTable = ({ list }) => {
-	console.log('render StudyTable');
+	// console.log('render StudyTable');
 
 	return (
 		<ul>

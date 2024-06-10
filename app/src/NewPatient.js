@@ -8,7 +8,7 @@ import DatePicker from './component/DatePicker.js';
 import './style/App.css';
 
 const NewPatient = ({ apiEndPt }) => {
-	console.log('render NewPatient()');
+	// console.log('render NewPatient()');
 
 	const [patientState, setPatientState] = React.useState({ firstName: "", lastName: "", dob: "", gender: { id : ""}, condition: { id : ""}, study: { id : ""}, recruitmentDate: "" });
     const [genderList, setGenderList] = React.useState({data: []});
@@ -54,7 +54,7 @@ const NewPatient = ({ apiEndPt }) => {
     const fetchGenderList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/gender`);
-			console.log(result.data);
+			// console.log(result.data);
 			setGenderList({ data: result.data});
             setPatientState((prevState) => ({...prevState, gender: {...prevState.gender, id: result.data[0].id}}));
 		}
@@ -69,7 +69,7 @@ const NewPatient = ({ apiEndPt }) => {
     const fetchConditionList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/condition`);
-			console.log(result.data);
+			// console.log(result.data);
 			setConditionList({ data: result.data});
             setPatientState((prevState) => ({...prevState, condition: {...prevState.condition, id: result.data[0].id}}));
 		}
@@ -84,7 +84,7 @@ const NewPatient = ({ apiEndPt }) => {
     const fetchStudyList = async() => {
 		try {
 			const result = await axios.get(`${apiEndPt}/study/allowRecruiting`);
-			console.log(result.data);
+			// console.log(result.data);
 			setStudyList({ data: result.data});
             setPatientState((prevState) => ({...prevState, study: {...prevState.study, id: result.data[0].id}}));
 		}
@@ -97,8 +97,8 @@ const NewPatient = ({ apiEndPt }) => {
     };        
 
 	const handleChangeValue = (event) => {
-		console.log(event.target.id);
-        console.log(patientState);
+		// console.log(event.target.id);
+        // console.log(patientState);
 		const val = event.target.value;
 		switch (event.target.id) {
 			case "firstName":
@@ -122,7 +122,7 @@ const NewPatient = ({ apiEndPt }) => {
 		let navigate = useNavigate();
 	
 		const handleCreatePatient = async () => {
-			console.log('handleCreatePatient');
+			// console.log('handleCreatePatient');
 
 			const validationErrors = validate();
 			if (Object.keys(validationErrors).length > 0) {
