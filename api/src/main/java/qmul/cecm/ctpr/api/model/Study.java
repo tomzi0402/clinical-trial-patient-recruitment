@@ -21,4 +21,7 @@ public class Study {
     @JoinColumn(name = "status_id")
     private Status status;
 
+    public String getName() {
+        return therapeutics;
+    }
 }

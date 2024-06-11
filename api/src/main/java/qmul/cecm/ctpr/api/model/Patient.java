@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @NoArgsConstructor
@@ -15,13 +16,30 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private Integer age;
+    private String firstName;
+    private String lastName;
+    private LocalDate dob;
+
     @ManyToOne
     @JoinColumn(name = "gender_id")
     private Gender gender;
+
     @ManyToOne
     @JoinColumn(name = "condition_id")
     private Condition condition;
+
     private LocalDate recruitmentDate;
+
+    @ManyToOne
+    @JoinColumn(name = "study_id")
+    private Study study;
+
+    public int getAge() {
+        return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    public String getFullName() {
+        String fullName =  firstName.strip() + " " + lastName.strip();
+        return fullName.strip();
+    }
 }
