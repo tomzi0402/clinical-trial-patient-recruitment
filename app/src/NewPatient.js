@@ -86,7 +86,7 @@ const NewPatient = ({ apiEndPt }) => {
 			const result = await axios.get(`${apiEndPt}/study/allowRecruiting`);
 			// console.log(result.data);
 			setStudyList({ data: result.data});
-            setPatientState((prevState) => ({...prevState, study: {...prevState.study, id: result.data[0].id}}));
+            setPatientState((prevState) => ({...prevState, study: {...prevState.study, id: result.data.length>0 ? result.data[0].id : ''}}));
 		}
 		catch (error) {
 			console.log(error);
@@ -182,7 +182,7 @@ const NewPatient = ({ apiEndPt }) => {
 			{errors.condition && <p className="error">{errors.condition}</p>}
 			<br />
 			<label htmlFor="study">Study:<span style={{ color: 'red' }}>*</span></label>
-            <Select id="study" list={studyList} onChangeHandler={handleChangeValue} required/>
+			<Select id="study" list={studyList} onChangeHandler={handleChangeValue} required/>
 			{errors.study && <p className="error">{errors.study}</p>}
 			<br />           
 			<label htmlFor="recruitmentDate">Recruitment Date:<span style={{ color: 'red' }}>*</span></label>
