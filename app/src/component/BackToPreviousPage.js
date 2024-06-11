@@ -9,7 +9,7 @@ const BackToPreviousPage = () => {
 	}
 	return (
 		<>
-			<button className='button' type="button" onClick={handleGoBack}>Cancel</button>
+			<button className='button' type="button" onClick={handleGoBack} data-testid="cancel-button">Cancel</button>
 		</>
 	);
 }

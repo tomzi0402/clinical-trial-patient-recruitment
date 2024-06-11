@@ -7,6 +7,6 @@ Run `npm test` from /app directory
 Run `npm run build` from /app directory
 
 ### How to start APP
-Run `npm start` from /app directory
+Run `npm install && npm start` from /app directory
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

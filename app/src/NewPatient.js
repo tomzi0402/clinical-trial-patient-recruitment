@@ -156,7 +156,7 @@ const NewPatient = ({ apiEndPt }) => {
     }, []);
 
 	if (isLoading.loadingGender || isLoading.loadingCondition || isLoading.loadingStudy) {
-		return <div>Loading...</div>;
+		return <div data-testid="loading">Loading...</div>;
 	}			
 
 	return (

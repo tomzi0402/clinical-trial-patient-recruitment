@@ -109,7 +109,7 @@ const EditStudy = ({ apiEndPt }) => {
     }, []);
 
 	if (isLoading.loadingStudy || isLoading.loadingStatus) {
-		return <div>Loading...</div>;
+		return <div data-testid="loading">Loading...</div>;
 	}			
 
 	return (

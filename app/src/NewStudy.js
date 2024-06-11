@@ -92,7 +92,7 @@ const NewStudy = ({ apiEndPt }) => {
     }, []);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div data-testid="loading">Loading...</div>;
 	}		
 
 	return (

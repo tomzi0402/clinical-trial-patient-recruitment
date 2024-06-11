@@ -11,12 +11,7 @@ const DatePicker = ({id, onChangedHandler, defaultDate}) => {
   };
 
   return (    
-      <input
-        type="date"
-        id={id}
-        value={selectedDate}
-        onChange={handleDateChange}
-      />
+      <input type="date" id={id} value={selectedDate} onChange={handleDateChange} data-testid="date-input"/>
   );
 };
 
