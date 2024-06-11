@@ -84,4 +84,12 @@ public class StudyServiceTest {
         Study result = studyService.updateStatus(firstStudy.getId(), newStatus);
         assertEquals(updatedStudy.getStatus(), result.getStatus());
     }
+
+    @Test
+    public void testGetAllowRecruitingStudies() {
+        List<Study> allowedRecruitingStudies = mockStudies.stream().filter(x -> x.getStatus().getAllowRecruit()).toList();
+        given(studyRepo.findAllowRecruitingStudies()).willReturn(allowedRecruitingStudies);
+        List<Study> foundStudies = studyService.getAllowRecruitingStudies();
+        assertEquals(allowedRecruitingStudies, foundStudies);
+    }
 }

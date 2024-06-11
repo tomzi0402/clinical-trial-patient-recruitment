@@ -72,16 +72,4 @@ public class StudyController {
         }
     }
 
-    @PatchMapping("/status/{id}")
-    public ResponseEntity<Study> updateStatus(@PathVariable Long id, @RequestBody Status status) {
-        try {
-            return ResponseEntity.ok(studyService.updateStatus(id, status));
-        } catch (NoSuchElementException e) {
-            LOG.warn(e);
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            LOG.error(e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
 }

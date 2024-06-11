@@ -2,7 +2,6 @@ package qmul.cecm.ctpr.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mapping.model.Property;
 import org.springframework.stereotype.Service;
 import qmul.cecm.ctpr.api.model.Status;
 import qmul.cecm.ctpr.api.model.Study;
