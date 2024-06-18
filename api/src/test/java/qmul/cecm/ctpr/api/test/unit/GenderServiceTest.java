@@ -37,7 +37,7 @@ public class GenderServiceTest {
     public void testGetAllGenders() {
         given(genderRepo.findAll()).willReturn(mockGenders);
         List<Gender> foundGenders = genderService.getAllGenders();
-        assertEquals(foundGenders.size(), mockGenders.size());
-        assertEquals(foundGenders, mockGenders);
+        assertEquals(mockGenders.size(), foundGenders.size());
+        assertEquals(mockGenders, foundGenders);
     }
 }

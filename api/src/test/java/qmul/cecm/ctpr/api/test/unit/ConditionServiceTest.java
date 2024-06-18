@@ -40,7 +40,7 @@ public class ConditionServiceTest {
     public void testGetAllConditions() {
         given(conditionRepo.findAll()).willReturn(mockConditions);
         List<Condition> foundConditions = conditionService.getAllConditions();
-        assertEquals(foundConditions.size(), mockConditions.size());
-        assertEquals(foundConditions, mockConditions);
+        assertEquals(mockConditions.size(), foundConditions.size());
+        assertEquals(mockConditions, foundConditions);
     }
 }

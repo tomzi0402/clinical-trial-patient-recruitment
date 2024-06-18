@@ -76,7 +76,7 @@ public class PatientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.firstName").value(newFirstName))
-                .andExpect(jsonPath("$.gender.id").value(2L));
+                .andExpect(jsonPath("$.gender.id").value(newGender.getId()));
     }
 
     @Test

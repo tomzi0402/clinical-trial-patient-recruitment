@@ -41,7 +41,7 @@ public class StatusServiceTest {
     public void testGetAllStatus() {
         given(statusRepo.findAll()).willReturn(mockStatus);
         List<Status> foundStatus = statusService.getAllStatus();
-        assertEquals(foundStatus.size(), mockStatus.size());
-        assertEquals(foundStatus, mockStatus);
+        assertEquals(mockStatus.size(), foundStatus.size());
+        assertEquals(mockStatus, foundStatus);
     }
 }
