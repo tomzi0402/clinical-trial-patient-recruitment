@@ -10,7 +10,7 @@ name: Java CI with Maven
 run-name: ${{ github.actor }} is testing out GitHub Actions
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "tomzi0402-patch-1" ]
   pull_request:
     branches: [ "main" ]
 
@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: cd api | mvn -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
