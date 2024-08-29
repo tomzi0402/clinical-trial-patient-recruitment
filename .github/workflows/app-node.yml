@@ -25,7 +25,7 @@ jobs:
 
     # core part to replace secret variables
     - name: Find and Replace by secret variables
-      uses: jacobtomlinson/gha-find-replace@v2
+      uses: jacobtomlinson/gha-find-replace@v3
       with:
         find: "%API_ENDPOINT%"
         replace: ${{ secrets.API_ENDPOINT }}
