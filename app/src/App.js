@@ -9,7 +9,7 @@ import EditPatient from './EditPatient.js';
 import { BrowserRouter as Router, Link, Switch, Routes, Route, Redirect } from 'react-router-dom';
 
 const title = 'Clinical Trial Patient Recruitment System'
-const API_ENDPOINT = 'http://localhost:8080/api'
+const API_ENDPOINT = '%API_ENDPOINT%'
 
 function App() {
   // console.log('render App()')
