@@ -7,7 +7,7 @@
 # documentation.
 
 name: Java CI with Maven
-run-name: ${{ github.actor }} is doing push to the branch 'tomzi0402-patch-1'
+run-name: ${{ github.actor }} is doing push
 on:
   push:
     branches: [ "tomzi0402-patch-1" ]
