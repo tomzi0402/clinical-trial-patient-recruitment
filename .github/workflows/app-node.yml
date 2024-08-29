@@ -22,6 +22,16 @@ jobs:
     - uses: actions/setup-node@v4      
       with:
         node-version: '22'
+
+    # core part to replace secret variables
+    - name: Find and Replace by secret variables
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "%API_ENDPOINT%"
+        replace: ${{ secrets.API_ENDPOINT }}
+        regex: false
+        include: '**App.js'
+
     - run: npm install
     - run: npm test
     - run: npm run build
